@@ -10,13 +10,15 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer user_id;
+    private Integer userId;
     private String email;
     private String login;
     private String nickname;
-    private String password_hash;
+    @Column(name = "password_hash")
+    private String passwordHash;
     private String role = "user";
-    private OffsetDateTime created_at = OffsetDateTime.now();
+    @Column(name = "created_at")
+    private OffsetDateTime createdAt = OffsetDateTime.now();
     private Integer balance = 0;
     private String info = "";
     @OneToMany(mappedBy = "user")
@@ -31,19 +33,19 @@ public class User {
     public User() {
     }
 
-    public User(String email, String login, String nickname, String password_hash) {
+    public User(String email, String login, String nickname, String passwordHash) {
         this.email = email;
         this.login = login;
         this.nickname = nickname;
-        this.password_hash = password_hash;
+        this.passwordHash = passwordHash;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -70,12 +72,12 @@ public class User {
         this.nickname = nickname;
     }
 
-    public String getPassword_hash() {
-        return password_hash;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword_hash(String password_hash) {
-        this.password_hash = password_hash;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public String getRole() {
@@ -86,12 +88,12 @@ public class User {
         this.role = role;
     }
 
-    public OffsetDateTime getCreated_at() {
-        return created_at;
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(OffsetDateTime created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Integer getBalance() {

@@ -13,20 +13,25 @@ import java.util.List;
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer game_id;
+    @Column(name = "game_id")
+    private Integer gameId;
     @NotBlank
     private String title;
     private Double rating;
-    private OffsetDateTime created_at = OffsetDateTime.now();
-    @Column(nullable = false)
-    private Integer developer_id;
+    @Column(name = "created_at")
+    private OffsetDateTime createdAt = OffsetDateTime.now();
+    @Column(name = "developer_id", nullable = false)
+    private Integer developerId;
     @Min(0)
     private Integer price;
     @Column(columnDefinition = "TEXT")
     private String description = "";
-    private LocalDate release_date;
-    private Boolean is_active = true;
-    private Integer purchase_count = 0;
+    @Column(name = "release_date")
+    private LocalDate releaseDate;
+    @Column(name = "is_active")
+    private Boolean isActive = true;
+    @Column(name = "purchase_count")
+    private Integer purchaseCount = 0;
     private String version = "1.0.0";
     @OneToMany(mappedBy = "game")
     private List<UserLibrary> inLibraries = new ArrayList<>();
@@ -43,20 +48,20 @@ public class Game {
     public Game(){
     }
 
-    public Game(String title, Integer developer_id, Integer price, String description, LocalDate release_date) {
+    public Game(String title, Integer developerId, Integer price, String description, LocalDate releaseDate) {
         this.title = title;
-        this.developer_id = developer_id;
+        this.developerId = developerId;
         this.price = price;
         this.description = description;
-        this.release_date = release_date;
+        this.releaseDate = releaseDate;
     }
 
-    public Integer getGame_id() {
-        return game_id;
+    public Integer getGameId() {
+        return gameId;
     }
 
-    public void setGame_id(Integer game_id) {
-        this.game_id = game_id;
+    public void setGameId(Integer gameId) {
+        this.gameId = gameId;
     }
 
     public String getTitle() {
@@ -75,20 +80,20 @@ public class Game {
         this.rating = rating;
     }
 
-    public OffsetDateTime getCreated_at() {
-        return created_at;
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(OffsetDateTime created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Integer getDeveloper_id() {
-        return developer_id;
+    public Integer getDeveloperId() {
+        return developerId;
     }
 
-    public void setDeveloper_id(Integer developer_id) {
-        this.developer_id = developer_id;
+    public void setDeveloperId(Integer developerId) {
+        this.developerId = developerId;
     }
 
     public Integer getPrice() {
@@ -107,28 +112,28 @@ public class Game {
         this.description = description;
     }
 
-    public LocalDate getRelease_date() {
-        return release_date;
+    public LocalDate getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setRelease_date(LocalDate release_date) {
-        this.release_date = release_date;
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
-    public Boolean getIs_active() {
-        return is_active;
+    public Boolean getIsActive() {
+        return isActive;
     }
 
-    public void setIs_active(Boolean is_active) {
-        this.is_active = is_active;
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
-    public Integer getPurchase_count() {
-        return purchase_count;
+    public Integer getPurchaseCount() {
+        return purchaseCount;
     }
 
-    public void setPurchase_count(Integer purchase_count) {
-        this.purchase_count = purchase_count;
+    public void setPurchaseCount(Integer purchaseCount) {
+        this.purchaseCount = purchaseCount;
     }
 
     public String getVersion() {

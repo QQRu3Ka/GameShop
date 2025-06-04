@@ -8,14 +8,16 @@ import java.time.OffsetDateTime;
 public class UserWishlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer wishlist_id;
+    @Column(name = "wishlist_id")
+    private Integer wishlistId;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
     @JoinColumn(name = "game_id")
     private Game game;
-    private OffsetDateTime added_date = OffsetDateTime.now();
+    @Column(name = "added_date")
+    private OffsetDateTime addedDate = OffsetDateTime.now();
 
     public UserWishlist() {
     }
@@ -25,12 +27,12 @@ public class UserWishlist {
         this.game = game;
     }
 
-    public Integer getWishlist_id() {
-        return wishlist_id;
+    public Integer getWishlistId() {
+        return wishlistId;
     }
 
-    public void setWishlist_id(Integer wishlist_id) {
-        this.wishlist_id = wishlist_id;
+    public void setWishlistId(Integer wishlistId) {
+        this.wishlistId = wishlistId;
     }
 
     public User getUser() {
@@ -49,11 +51,11 @@ public class UserWishlist {
         this.game = game;
     }
 
-    public OffsetDateTime getAdded_date() {
-        return added_date;
+    public OffsetDateTime getAddedDate() {
+        return addedDate;
     }
 
-    public void setAdded_date(OffsetDateTime added_date) {
-        this.added_date = added_date;
+    public void setAddedDate(OffsetDateTime addedDate) {
+        this.addedDate = addedDate;
     }
 }

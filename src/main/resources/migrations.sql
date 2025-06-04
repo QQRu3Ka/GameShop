@@ -72,8 +72,6 @@ CREATE TABLE Comments (
     rating SMALLINT CHECK (rating BETWEEN 0 AND 10),
     comment_text TEXT NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    likes_count INTEGER DEFAULT 0 CHECK (likes_count >= 0),
-    dislikes_count INTEGER DEFAULT 0 CHECK (dislikes_count >= 0)
 );
 
 ALTER TABLE Developers
@@ -111,3 +109,15 @@ ALTER TABLE Games
 ALTER COLUMN description SET DEFAULT '';
 
 ALTER TABLE Developers DROP COLUMN created_at;
+
+ALTER TABLE Comments
+ADD CONSTRAINT fk_comments_game
+FOREIGN KEY (game_id)
+REFERENCES Games(game_id)
+ON DELETE CASCADE;
+
+ALTER TABLE Comments
+ADD CONSTRAINT fk_comments_user
+FOREIGN KEY (user_id)
+REFERENCES Users(user_id)
+ON DELETE CASCADE;

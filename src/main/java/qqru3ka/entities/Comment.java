@@ -11,7 +11,8 @@ import java.time.OffsetDateTime;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer comment_id;
+    @Column(name = "comment_id")
+    private Integer commentId;
     @ManyToOne
     @JoinColumn(name = "game_id")
     private Game game;
@@ -22,8 +23,10 @@ public class Comment {
     @Max(10)
     private Integer rating;
     @NotBlank
-    private String comment_text;
-    private OffsetDateTime created_at = OffsetDateTime.now();
+    @Column(name = "comment_text")
+    private String commentText;
+    @Column(name = "created_at")
+    private OffsetDateTime createdAt = OffsetDateTime.now();
 
     public Comment() {
     }
@@ -31,16 +34,16 @@ public class Comment {
     public Comment(Game game, User user, Integer rating, String text) {
         this.game = game;
         this.user = user;
-        this.comment_text = text;
+        this.commentText = text;
         this.rating = rating;
     }
 
-    public Integer getComment_id() {
-        return comment_id;
+    public Integer getCommentId() {
+        return commentId;
     }
 
-    public void setComment_id(Integer comment_id) {
-        this.comment_id = comment_id;
+    public void setCommentId(Integer commentId) {
+        this.commentId = commentId;
     }
 
     public Game getGame() {
@@ -67,19 +70,19 @@ public class Comment {
         this.rating = rating;
     }
 
-    public String getComment_text() {
-        return comment_text;
+    public String getCommentText() {
+        return commentText;
     }
 
-    public void setComment_text(String comment_text) {
-        this.comment_text = comment_text;
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
     }
 
-    public OffsetDateTime getCreated_at() {
-        return created_at;
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(OffsetDateTime created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

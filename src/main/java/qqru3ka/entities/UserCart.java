@@ -1,16 +1,25 @@
 package qqru3ka.entities;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 import java.time.OffsetDateTime;
 
 @Entity(name = "UserCart")
 public class UserCart {
-    private Integer cart_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cart_id")
+    private Integer cartId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "game_id")
     private Game game;
-    private OffsetDateTime added_at = OffsetDateTime.now();
-    private OffsetDateTime expires_at = OffsetDateTime.now().plusMinutes(10);
+    @Column(name = "added_at")
+    private OffsetDateTime addedAt = OffsetDateTime.now();
+    @Column(name = "expires_at")
+    private OffsetDateTime expiresAt = OffsetDateTime.now().plusMinutes(10);
 
     public UserCart() {
     }
@@ -20,12 +29,12 @@ public class UserCart {
         this.game = game;
     }
 
-    public Integer getCart_id() {
-        return cart_id;
+    public Integer getCartId() {
+        return cartId;
     }
 
-    public void setCart_id(Integer cart_id) {
-        this.cart_id = cart_id;
+    public void setCartId(Integer cartId) {
+        this.cartId = cartId;
     }
 
     public User getUser() {
@@ -44,19 +53,19 @@ public class UserCart {
         this.game = game;
     }
 
-    public OffsetDateTime getAdded_at() {
-        return added_at;
+    public OffsetDateTime getAddedAt() {
+        return addedAt;
     }
 
-    public void setAdded_at(OffsetDateTime added_at) {
-        this.added_at = added_at;
+    public void setAddedAt(OffsetDateTime addedAt) {
+        this.addedAt = addedAt;
     }
 
-    public OffsetDateTime getExpires_at() {
-        return expires_at;
+    public OffsetDateTime getExpiresAt() {
+        return expiresAt;
     }
 
-    public void setExpires_at(OffsetDateTime expires_at) {
-        this.expires_at = expires_at;
+    public void setExpiresAt(OffsetDateTime expiresAt) {
+        this.expiresAt = expiresAt;
     }
 }

@@ -10,7 +10,8 @@ import java.util.List;
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer genre_id;
+    @Column(name = "genre_id")
+    private Integer genreId;
     @NotBlank
     private String name;
     private Integer popularity = 0;
@@ -24,12 +25,12 @@ public class Genre {
         this.name = name;
     }
 
-    public Integer getGenre_id() {
-        return genre_id;
+    public Integer getGenreId() {
+        return genreId;
     }
 
-    public void setGenre_id(Integer genre_id) {
-        this.genre_id = genre_id;
+    public void setGenreId(Integer genreId) {
+        this.genreId = genreId;
     }
 
     public @NotBlank String getName() {

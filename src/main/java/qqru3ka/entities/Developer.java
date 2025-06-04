@@ -5,14 +5,15 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 
 @Entity(name = "Developers")
 public class Developer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer developer_id;
-    private Integer user_id;
+    @Column(name = "developer_id")
+    private Integer developerId;
+    @Column(name = "user_id")
+    private Integer userId;
     @NotBlank
     @Column(unique = true)
     private String name;
@@ -21,36 +22,38 @@ public class Developer {
     private String email;
     @Column(columnDefinition = "TEXT")
     private String description;
-    private LocalDate founded_date;
+    @Column(name = "founded_date")
+    private LocalDate foundedDate;
     @Min(0)
     private Integer revenue;
     private String website;
-    private Boolean is_active = true;
+    @Column(name = "is_active")
+    private Boolean isActive = true;
 
     public Developer() {
     }
 
     public Developer(Integer userId, String name, String email, LocalDate foundedDate) {
-        this.user_id = userId;
+        this.userId = userId;
         this.name = name;
         this.email = email;
-        this.founded_date = foundedDate;
+        this.foundedDate = foundedDate;
     }
 
-    public Integer getDeveloper_id() {
-        return developer_id;
+    public Integer getDeveloperId() {
+        return developerId;
     }
 
-    public void setDeveloper_id(Integer developer_id) {
-        this.developer_id = developer_id;
+    public void setDeveloperId(Integer developerId) {
+        this.developerId = developerId;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public @NotBlank String getEmail() {
@@ -77,12 +80,12 @@ public class Developer {
         this.description = description;
     }
 
-    public LocalDate getFounded_date() {
-        return founded_date;
+    public LocalDate getFoundedDate() {
+        return foundedDate;
     }
 
-    public void setFounded_date(LocalDate founded_date) {
-        this.founded_date = founded_date;
+    public void setFoundedDate(LocalDate foundedDate) {
+        this.foundedDate = foundedDate;
     }
 
     public @Min(0) Integer getRevenue() {
@@ -101,11 +104,11 @@ public class Developer {
         this.website = website;
     }
 
-    public Boolean getIs_active() {
-        return is_active;
+    public Boolean getIsActive() {
+        return isActive;
     }
 
-    public void setIs_active(Boolean is_active) {
-        this.is_active = is_active;
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 }
