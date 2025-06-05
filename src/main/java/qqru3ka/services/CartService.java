@@ -6,16 +6,17 @@ import org.springframework.stereotype.Service;
 import qqru3ka.entities.Game;
 import qqru3ka.entities.User;
 import qqru3ka.entities.UserCart;
-import qqru3ka.entities.UserWishlist;
 import qqru3ka.repositories.CartRepository;
 import qqru3ka.repositories.GameRepository;
 import qqru3ka.repositories.UserRepository;
 
+import java.util.List;
+
 @Service
 public class CartService {
-    private CartRepository cartRepository;
-    private UserRepository userRepository;
-    private GameRepository gameRepository;
+    private final CartRepository cartRepository;
+    private final UserRepository userRepository;
+    private final GameRepository gameRepository;
 
     public CartService(CartRepository cartRepository, UserRepository userRepository,
                        GameRepository gameRepository) {
@@ -26,10 +27,8 @@ public class CartService {
 
     @Transactional
     public UserCart addToCart(Integer userId, Integer gameId) {
-        User user = userRepository.findByUserId(userId);
-        if (user == null) throw new EntityNotFoundException();
-        Game game = gameRepository.findByGameId(gameId);
-        if (game == null) throw new EntityNotFoundException();
+        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+        Game game = gameRepository.findById(gameId).orElseThrow(EntityNotFoundException::new);
 
         if (cartRepository.existsByUserAndGame(user, game)) {
             throw new IllegalStateException();
@@ -41,12 +40,16 @@ public class CartService {
 
     @Transactional
     public void removeFromCart(Integer userId, Integer gameId) {
-        User user = userRepository.findByUserId(userId);
-        if (user == null) throw new EntityNotFoundException();
-        Game game = gameRepository.findByGameId(gameId);
-        if (game == null) throw new EntityNotFoundException();
+        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+        Game game = gameRepository.findById(gameId).orElseThrow(EntityNotFoundException::new);
 
         UserCart entry = cartRepository.findByUserAndGame(user, game);
         cartRepository.delete(entry);
+    }
+
+    @Transactional
+    public List<UserCart> findGamesInCart(Integer id) {
+        User user = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return cartRepository.findByUser(user);
     }
 }

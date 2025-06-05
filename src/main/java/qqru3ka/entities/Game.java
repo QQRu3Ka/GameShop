@@ -29,7 +29,7 @@ public class Game {
     @Column(name = "release_date")
     private LocalDate releaseDate;
     @Column(name = "is_active")
-    private Boolean isActive = true;
+    private Boolean isActive = false;
     @Column(name = "purchase_count")
     private Integer purchaseCount = 0;
     private String version = "1.0.0";

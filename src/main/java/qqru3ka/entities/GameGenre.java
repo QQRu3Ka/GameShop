@@ -1,15 +1,17 @@
 package qqru3ka.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
+import jakarta.persistence.*;
 
 @Entity(name = "GameGenres")
 @IdClass(GameGenreId.class)
 public class GameGenre {
     @Id
+    @ManyToOne
+    @JoinColumn(name = "game_id")
     private Game game;
     @Id
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
     private Genre genre;
 
     public GameGenre() {

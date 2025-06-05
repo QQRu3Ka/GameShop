@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer> {
-    Game findByGameId(Integer gameId);
     List<Game> findByTitleContainingIgnoreCase(String title);
     List<Game> findByDeveloperId(Integer developerId);
     List<Game> findByPriceBetween(Integer minPrice, Integer maxPrice);
