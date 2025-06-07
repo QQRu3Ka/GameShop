@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import qqru3ka.dto.CommentDto;
+import qqru3ka.dto.GameAddDto;
 import qqru3ka.dto.GameStatusDto;
 import qqru3ka.entities.Comment;
 import qqru3ka.entities.Game;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 @RestController
 @RequestMapping("/game")
 public class GameController {
@@ -48,10 +50,10 @@ public class GameController {
         }
     }
 
-    @GetMapping("/dev")
-    public ResponseEntity<?> findByDeveloperId(@RequestBody Map<String, Integer> req) {
+    @GetMapping("/findDev/{id}")
+    public ResponseEntity<?> findByDeveloperId(@PathVariable("id") Integer id) {
         try {
-            List<Game> games = gameService.findByDeveloperId(req.get("developer_id"));
+            List<Game> games = gameService.findByDeveloperId(id);
             return ResponseEntity.ok(games);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

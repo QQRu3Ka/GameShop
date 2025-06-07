@@ -3,9 +3,11 @@ package qqru3ka.services;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import qqru3ka.dto.GameAddDto;
+import qqru3ka.entities.Developer;
 import qqru3ka.entities.Game;
 import qqru3ka.entities.GameGenre;
 import qqru3ka.entities.Genre;
+import qqru3ka.repositories.DeveloperRepository;
 import qqru3ka.repositories.GameGenreRepository;
 import qqru3ka.repositories.GameRepository;
 import qqru3ka.repositories.GenreRepository;
@@ -18,11 +20,14 @@ public class GameService {
     private final GameGenreRepository gameGenreRepository;
     private final GameRepository gameRepository;
     private final GenreRepository genreRepository;
+    private final DeveloperRepository developerRepository;
 
-    public GameService(GameGenreRepository gameGenreRepository, GameRepository gameRepository, GenreRepository genreRepository) {
+    public GameService(GameGenreRepository gameGenreRepository, GameRepository gameRepository,
+                       GenreRepository genreRepository, DeveloperRepository developerRepository) {
         this.gameGenreRepository = gameGenreRepository;
         this.gameRepository = gameRepository;
         this.genreRepository = genreRepository;
+        this.developerRepository = developerRepository;
     }
 
     public Game findById(Integer id) {
@@ -65,10 +70,12 @@ public class GameService {
     public Game storeGame(GameAddDto gameAddDto) {
         Game game = new Game();
         game.setTitle(gameAddDto.getTitle());
-        game.setDeveloperId(gameAddDto.getDeveloperId());
+        Developer developer = developerRepository.findByUserId(gameAddDto.getDeveloperId()).orElseThrow(EntityNotFoundException::new);
+        game.setDeveloperId(developer.getDeveloperId());
         game.setPrice(gameAddDto.getPrice());
         game.setDescription(gameAddDto.getDescription());
         game.setReleaseDate(gameAddDto.getReleaseDate());
+        game.setStorageName(gameAddDto.getStorageName());
         return gameRepository.save(game);
     }
 

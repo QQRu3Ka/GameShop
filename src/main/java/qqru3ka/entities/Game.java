@@ -33,6 +33,7 @@ public class Game {
     @Column(name = "purchase_count")
     private Integer purchaseCount = 0;
     private String version = "1.0.0";
+    private String storageName;
     @OneToMany(mappedBy = "game")
     private List<UserLibrary> inLibraries = new ArrayList<>();
     @OneToMany(mappedBy = "game")
@@ -182,5 +183,21 @@ public class Game {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public String getStorageName() {
+        return storageName;
+    }
+
+    public void setStorageName(String storageName) {
+        this.storageName = storageName;
     }
 }

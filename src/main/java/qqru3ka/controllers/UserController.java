@@ -17,6 +17,7 @@ import qqru3ka.services.WishlistService;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 @RestController
 @RequestMapping("/user")
 public class UserController {

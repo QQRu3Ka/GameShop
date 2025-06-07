@@ -4,14 +4,16 @@ public class DeveloperDto {
     private Integer userId;
     private String name;
     private String email;
+    private String description;
 
     public DeveloperDto() {
     }
 
-    public DeveloperDto(Integer userId, String name, String email) {
+    public DeveloperDto(Integer userId, String name, String email, String description) {
         this.userId = userId;
         this.name = name;
         this.email = email;
+        this.description = description;
     }
 
     public Integer getUserId() {
@@ -36,5 +38,13 @@ public class DeveloperDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

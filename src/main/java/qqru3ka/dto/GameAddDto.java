@@ -8,13 +8,19 @@ public class GameAddDto {
     private Integer price;
     private String description;
     private LocalDate releaseDate;
+    private String storageName;
 
-    public GameAddDto(String title, Integer developerId, Integer price, String description, LocalDate releaseDate) {
+    public GameAddDto() {
+    }
+
+    public GameAddDto(String title, Integer developerId, Integer price, String description,
+                      LocalDate releaseDate, String storageName) {
         this.title = title;
         this.developerId = developerId;
         this.price = price;
         this.description = description;
         this.releaseDate = releaseDate;
+        this.storageName = storageName;
     }
 
     public String getTitle() {
@@ -55,5 +61,13 @@ public class GameAddDto {
 
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public String getStorageName() {
+        return storageName;
+    }
+
+    public void setStorageName(String storageName) {
+        this.storageName = storageName;
     }
 }

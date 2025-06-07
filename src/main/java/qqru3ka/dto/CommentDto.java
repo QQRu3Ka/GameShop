@@ -6,6 +6,9 @@ public class CommentDto {
     private Integer rating;
     private String text;
 
+    public CommentDto() {
+    }
+
     public CommentDto(Integer gameId, Integer userId, Integer rating, String text) {
         this.gameId = gameId;
         this.userId = userId;

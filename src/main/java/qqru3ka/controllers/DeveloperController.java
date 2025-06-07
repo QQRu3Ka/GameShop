@@ -6,21 +6,27 @@ import qqru3ka.dto.DeveloperDto;
 import qqru3ka.dto.GameAddDto;
 import qqru3ka.entities.Developer;
 import qqru3ka.entities.Game;
+import qqru3ka.entities.User;
 import qqru3ka.services.DeveloperService;
 import qqru3ka.services.GameService;
+import qqru3ka.services.UserService;
 
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 @RestController
 @RequestMapping("/dev")
 public class DeveloperController {
-    private DeveloperService developerService;
-    private GameService gameService;
+    private final DeveloperService developerService;
+    private final GameService gameService;
+    private final UserService userService;
 
-    public DeveloperController(DeveloperService developerService, GameService gameService) {
+    public DeveloperController(DeveloperService developerService, GameService gameService,
+                               UserService userService) {
         this.developerService = developerService;
         this.gameService = gameService;
+        this.userService = userService;
     }
 
-    @GetMapping("/game/{id}")
+    @GetMapping("/dev/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
         try {
             Developer developer = developerService.findById(id);
@@ -40,10 +46,12 @@ public class DeveloperController {
         }
     }
 
-    @PostMapping("/{id}")
+    @PostMapping
     public ResponseEntity<?> storeDeveloper(@RequestBody DeveloperDto developerDto) {
         try {
             Developer developer = developerService.storeDeveloper(developerDto);
+            User user = userService.findById(developerDto.getUserId());
+            userService.updateUserRole(user, "developer");
             return ResponseEntity.ok(developer);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

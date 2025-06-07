@@ -6,6 +6,8 @@ import qqru3ka.dto.DeveloperDto;
 import qqru3ka.entities.Developer;
 import qqru3ka.repositories.DeveloperRepository;
 
+import java.time.LocalDate;
+
 @Service
 public class DeveloperService {
     private final DeveloperRepository developerRepository;
@@ -36,6 +38,9 @@ public class DeveloperService {
         developer.setUserId(developerDto.getUserId());
         developer.setName(developerDto.getName());
         developer.setEmail(developerDto.getEmail());
+        developer.setDescription(developerDto.getDescription());
+        developer.setRevenue(0);
+        developer.setFoundedDate(LocalDate.now());
         return developerRepository.save(developer);
     }
 }
